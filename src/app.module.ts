@@ -11,18 +11,31 @@ import { AttendanceModule } from './attendance/attendance.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+
+      type: 'mysql',
+      host: '195.35.59.20',
+      port: 3306,
+      username: 'u450546278_attend',
+      password: ':bQqao5u3K',
+      database: 'u450546278_attendance_db',
+
+
       // type: 'mysql',
       // host: 'localhost',
       // port: 3306,
       // username: 'root',
       // password: '124536',
       // database: 'attendance_db',
-      type: 'postgres',
-      host: 'dpg-d8i1u2lckfvc73bbfcc0-a',
-      port: 5432,
-      username: 'attendance_db_4bpr_user',
-      password: '8b61qhDpm7B0y1l7aNAxZ2BwZFHz68xv',
-      database: 'attendance_db_4bpr',
+
+
+      // type: 'postgres',
+      // host: 'dpg-d8i1u2lckfvc73bbfcc0-a',
+      // port: 5432,
+      // username: 'attendance_db_4bpr_user',
+      // password: '8b61qhDpm7B0y1l7aNAxZ2BwZFHz68xv',
+      // database: 'attendance_db_4bpr',
+
+
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       migrations: [__dirname + '/database/migrations/*{.ts,.js}'],
       migrationsRun: false,
