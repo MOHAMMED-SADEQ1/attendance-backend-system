@@ -41,7 +41,6 @@ import { AttendanceModule } from './attendance/attendance.module';
       migrationsRun: false,
       synchronize: false,
       logging: false,
-      timezone: '+03:00',
     }),
     AuthModule,
     EmployeesModule,
