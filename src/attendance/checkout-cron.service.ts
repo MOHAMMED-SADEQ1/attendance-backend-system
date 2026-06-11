@@ -100,12 +100,18 @@ export class CheckoutCronService {
   }
 
   private calculateExpectedEnd(checkInTime: Date, shiftPolicy: ShiftPolicy): Date {
-    const [startH, startM] = shiftPolicy.startTime.split(':').map(Number);
     const [endH, endM] = shiftPolicy.endTime.split(':').map(Number);
+    const [startH, startM] = shiftPolicy.startTime.split(':').map(Number);
 
-    let durationMinutes = (endH * 60 + endM) - (startH * 60 + startM);
-    if (durationMinutes <= 0) durationMinutes += 24 * 60;
+    const expectedEnd = new Date(checkInTime);
+    expectedEnd.setHours(endH, endM, 0, 0);
 
-    return new Date(checkInTime.getTime() + durationMinutes * 60 * 1000);
+    const endMinutes = endH * 60 + endM;
+    const startMinutes = startH * 60 + startM;
+    if (endMinutes <= startMinutes) {
+      expectedEnd.setDate(expectedEnd.getDate() + 1);
+    }
+
+    return expectedEnd;
   }
 }
