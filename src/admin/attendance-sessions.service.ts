@@ -51,7 +51,12 @@ export class AttendanceSessionsService {
 
   async update(id: number, dto: UpdateAttendanceDto) {
     await this.findOne(id);
-    await this.repo.update(id, dto);
+
+    const updateData: any = { ...dto };
+    if (dto.checkInTime) updateData.checkInTime = new Date(dto.checkInTime);
+    if (dto.checkOutTime) updateData.checkOutTime = new Date(dto.checkOutTime);
+
+    await this.repo.update(id, updateData);
     return this.findOne(id);
   }
 }

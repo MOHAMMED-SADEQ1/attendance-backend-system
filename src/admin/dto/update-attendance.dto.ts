@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsEnum, IsNumber } from 'class-validator';
+import { IsOptional, IsString, IsEnum, IsNumber, IsDateString } from 'class-validator';
 
 export class UpdateAttendanceDto {
   @IsOptional()
@@ -16,4 +16,12 @@ export class UpdateAttendanceDto {
   @IsOptional()
   @IsNumber()
   overtimeHours?: number;
+
+  @IsOptional()
+  @IsDateString()
+  checkInTime?: string;
+
+  @IsOptional()
+  @IsDateString()
+  checkOutTime?: string;
 }

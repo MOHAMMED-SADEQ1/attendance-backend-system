@@ -335,18 +335,30 @@
 - **الصلاحية:** ADMIN, MANAGER
 
 ### PATCH /admin/attendance/session/:id
-تعديل جلسة حضور.
+تعديل جلسة حضور (بما في ذلك أوقات الحضور والانصراف).
 - **الصلاحية:** ADMIN, MANAGER
 
 **Request:**
 ```json
 {
+  "checkInTime": "2026-06-10T16:03:18+03:00",
+  "checkOutTime": "2026-06-11T00:08:18+03:00",
   "status": "LATE",
-  "notes": "تأخر 15 دقيقة بعذر",
-  "calculatedHours": 7.5
+  "notes": "تعديل يدوي من المدير",
+  "calculatedHours": 8.08
 }
 ```
-> **ملاحظة:** الـ `calculatedHours` عند الإرسال (PATCH) يُرسل بنظام 100 العشري (`7.50` = 7.5 ساعة). الاستجابة تكون بنظام 60 (`"7.30"`).
+
+| الحقل | النوع | الوصف |
+|-------|-------|-------|
+| checkInTime | string | وقت الحضور (ISO 8601 مع +03:00) |
+| checkOutTime | string | وقت الانصراف (ISO 8601 مع +03:00) |
+| status | string | `PRESENT`, `ABSENT`, `LATE`, `EARLY_LEAVE`, `VACATION` |
+| notes | string | ملاحظات |
+| calculatedHours | number | ساعات العمل (نظام 100 العشري) |
+| overtimeHours | number | ساعات إضافية (نظام 100 العشري) |
+
+> **ملاحظة:** `calculatedHours` عند الإرسال يُرسل بنظام 100 العشري (`7.50` = 7.5 ساعة). الاستجابة تكون بنظام 60 (`"7.30"`).
 
 ---
 
